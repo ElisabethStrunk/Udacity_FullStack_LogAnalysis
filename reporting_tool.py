@@ -83,20 +83,31 @@ def find_error_riddled_days():
     return run_query(query)
 
 
-print("------------------")
-print("----- REPORT -----")
-print("------------------")
-print(datetime.datetime.now().strftime("%B %d, %Y -- %H:%M:%S"))
-print("\n")
-print("1. What are the most popular three articles of all time?")
-for article in find_top_three_articles():
-    print('    "{}" - {} views'.format(article[0], article[1]))
-print("\n")
-print("2. Who are the most popular article authors of all time?")
-for author in find_views_per_author():
-    print('    "{}" -- {} views'.format(author[0], author[1]))
-print("\n")
-print("3. On which days did more than 1% of requests lead to errors?")
-for day in find_error_riddled_days():
-    print('    {} -- {}% errors'.format(day[0].strftime("%B %d, %Y"), round(day[1], 1)))
-print("\n")
+output_file = "report-{}.txt".format(datetime.datetime.now().strftime("%m-%d-%Y-%H-%M-%S"))
+
+print("\n\nReport is being created...")
+
+with open(output_file, 'w') as f:
+    print("------------------", file=f, end='\r\n')
+    print("----- REPORT -----", file=f, end='\r\n')
+    print("------------------", file=f, end='\r\n')
+    print(datetime.datetime.now().strftime("%B %d, %Y - %H:%M:%S"), file=f, end='\r\n')
+    print("\n", file=f, end='\r\n')
+    print("...")  # output to terminal so signal process
+    print("1. What are the most popular three articles of all time?", file=f, end='\r\n')
+    for article in find_top_three_articles():
+        print('    "{}" - {} views'.format(article[0], article[1]), file=f, end='\r\n')
+    print("\n", file=f, end='\r\n')
+    print("...")  # output to terminal so signal process
+    print("2. Who are the most popular article authors of all time?", file=f, end='\r\n')
+    for author in find_views_per_author():
+        print('    "{}" -- {} views'.format(author[0], author[1]), file=f, end='\r\n')
+    print("\n", file=f, end='\r\n')
+    print("...")  # output to terminal so signal process
+    print("3. On which days did more than 1% of requests lead to errors?", file=f, end='\r\n')
+    for day in find_error_riddled_days():
+        print('    {} -- {}% errors'.format(day[0].strftime("%B %d, %Y"), round(day[1], 1)), file=f, end='\r\n')
+    print("\n", file=f, end='\r\n')
+    f.close()
+
+print("Report was created and stored in file {}\n\n".format(output_file))
