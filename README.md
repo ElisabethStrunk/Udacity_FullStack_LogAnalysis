@@ -38,3 +38,15 @@ To run the reporting tool...
     ```
 5. Observe the progress; the tool will print a notification once the report has been successfully created.
 6. Find the report in the reporting directory in the text file with the name _report-[date]-[time]_.
+##For Maintainers
+The following provides a short description of the program's design.
+
+There are 4 functions:
++ run_query
++ find_top_three_articles
++ find_views_per_author
++ find_error_riddled_days
+
+For each function a function header with detailed information is provided in-code. This header also contains a description of the query design.
+
+The report file is generated and populated using print() and the results of calling the fore-mentioned functions successively.
