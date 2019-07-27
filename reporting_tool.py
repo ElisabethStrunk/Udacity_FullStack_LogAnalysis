@@ -1,10 +1,11 @@
-#!/usr/bin/python3
-
+#!/usr/bin/env python3
 """
 TODO: Write short description
 """
 
 import psycopg2
+import datetime
+
 
 __author__ = "Elisabeth M. Strunk"
 __version__ = 1.0
@@ -80,3 +81,22 @@ def find_error_riddled_days():
             "WHERE error_percentage > 1.0 " \
             "ORDER BY day;"
     return run_query(query)
+
+
+print("------------------")
+print("----- REPORT -----")
+print("------------------")
+print(datetime.datetime.now().strftime("%B %d, %Y -- %H:%M:%S"))
+print("\n")
+print("1. What are the most popular three articles of all time?")
+for article in find_top_three_articles():
+    print('    "{}" - {} views'.format(article[0], article[1]))
+print("\n")
+print("2. Who are the most popular article authors of all time?")
+for author in find_views_per_author():
+    print('    "{}" -- {} views'.format(author[0], author[1]))
+print("\n")
+print("3. On which days did more than 1% of requests lead to errors?")
+for day in find_error_riddled_days():
+    print('    {} -- {}% errors'.format(day[0].strftime("%B %d, %Y"), round(day[1], 1)))
+print("\n")
