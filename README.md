@@ -16,6 +16,7 @@ Each report is saved in a new text file.
 ###System
 This tool is designed to run on a system with the following characteristics:
 + Linux operating system
++ python 3 installed
 + postgreSQL running
 + containing our _news_ database
 ### Preparation
