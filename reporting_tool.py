@@ -38,7 +38,7 @@ def find_top_three_articles():
     return run_query(query)
 
 
-def find_top_three_articles():
+def find_views_per_author():
     '''
     Investigate popularity of authors
     Find number of article views per author
