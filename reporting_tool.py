@@ -1,6 +1,11 @@
 #!/usr/bin/env python3
 """
-TODO: Write short description
+Reporting Tool
+
+This is a tool to create reports concerning our newspaper website.
+Each report is saved in a new text file.
+
+FOR INTERNAL USE ONLY!
 """
 
 import psycopg2
@@ -15,6 +20,11 @@ __status__ = "Development"
 
 
 def run_query(query):
+    '''
+    Run a query on the "news" database
+    :param query: string containing the query's SQL statement
+    :return: Query result
+    '''
     db = psycopg2.connect("dbname=news")
     cursor = db.cursor()
     cursor.execute(query)
@@ -27,6 +37,10 @@ def find_top_three_articles():
     '''
     Investigate popularity of articles
     Find top 3 (most viewed) articles - by title
+    Query design:
+        1) Join the articles table with the article_log view to get the connection between url and article title
+        2) Count the number of log entries for each article and sort by the number of entries/views
+        3) Select only the 3 highest-ranking articles
     :return: Query result containing title and number of views for the top 3 articles
     '''
     query = "SELECT articles.title, count(*) AS num_views " \
@@ -43,6 +57,11 @@ def find_views_per_author():
     '''
     Investigate popularity of authors
     Find number of article views per author
+    Query design:
+        1) Join the authors table with the articles table to get the connection which author wrote which article
+        2) Add the article_log view to the join where the article's slug matches the log entry's url to get the
+           connection which log entry belongs to which author
+        3) Count the number of log entries for each author and sort by the number of entries/views
     :return: Query result containing name and number of views for all authors
     '''
     query = "SELECT authors.name, count(*) AS num_views " \
@@ -60,6 +79,11 @@ def find_error_riddled_days():
     '''
     Investigate error-riddled days
     Find days with an error percentage > 1%
+    Query design:
+        1) Get a table containing all days with their total number of requests (request_query)
+        2) Get a table containing all days with their number of errors (error_query)
+        3) Join these two table to derive a list containing all days with their error percentage (percentage_query)
+        4) Select only those entries in the percentage_query table where the error percentage is > 1 and sort by day
     :return: Query result containing date and error percentage of all days with an error percentage > 1%
     '''
     query = "SELECT day, error_percentage " \
