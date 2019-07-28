@@ -14,7 +14,7 @@ import sys
 
 
 __author__ = "Elisabeth M. Strunk"
-__version__ = 1.0
+__version__ = 1.1
 __maintainer__ = "Elisabeth M. Strunk"
 __email__ = "elisabeth.maria.strunk@gmail.com"
 __status__ = "Development"
