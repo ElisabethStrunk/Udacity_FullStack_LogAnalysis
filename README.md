@@ -12,8 +12,8 @@ Elisabeth Maria Strunk, 07-27-2019
 
 This is a tool to create reports concerning our newspaper website.
 Each report is saved in a new text file.
-##Prerequisites
-###System
+## Prerequisites
+### System
 This tool is designed to run on a system with the following characteristics:
 + Linux operating system
 + python 3 installed
@@ -28,7 +28,7 @@ FROM log, articles
 WHERE REPLACE(log.path, '/article/', '') = articles.slug;
 ```
 Note that the reporting tool will not function properly, if this view has not been created!
-##How To Use The Reporting Tool
+## How To Use The Reporting Tool
 To run the reporting tool...
 1. Transfer the python script _reporting_tool.py_ to the directory you want to store the reports in (_reporting directory_ in the following).
 2. Open a bash session.
@@ -39,7 +39,7 @@ To run the reporting tool...
     ```
 5. Observe the progress; the tool will print a notification once the report has been successfully created.
 6. Find the report in the reporting directory in the text file with the name _report-[date]-[time]_.
-##For Maintainers
+## For Maintainers
 The following provides a short description of the program's design.
 
 There are 4 functions:
