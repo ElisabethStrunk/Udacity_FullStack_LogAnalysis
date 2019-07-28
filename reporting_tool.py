@@ -152,7 +152,7 @@ if __name__ == '__main__':
         print("2. Who are the most popular article authors of all time?",
               file=f, end='\r\n')
         for author in find_views_per_author():
-            print('    "{}" -- {} views'.format(author[0], author[1]),
+            print('    {} -- {} views'.format(author[0], author[1]),
                   file=f, end='\r\n')
         print("\n", file=f, end='\r\n')
         print("...")  # output to terminal so signal process
